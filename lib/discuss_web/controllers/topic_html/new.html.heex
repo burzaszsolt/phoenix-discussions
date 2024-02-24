@@ -1,0 +1,5 @@
+<.form :let={f} for={@changeset} phx-change="validate" phx-submit="save"
+  action={~p"/topics"}>
+  <.input field={f[:title]} type="text" value={} />
+  <.button type="submit" class="mt-2">Save</.button>
+</.form>
