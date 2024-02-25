@@ -961,6 +961,10 @@ select {
   margin-left: 1rem;
 }
 
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -999,10 +1003,6 @@ select {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
 }
 
 .block {

@@ -1,6 +1,17 @@
 <header class="px-4 sm:px-6 lg:px-8">
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Discussions</h2>
+    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+      Discussions
+    </h2>
+    <ul>
+      <%= if @conn.assigns[:user] do %>
+        <.link navigate={~p"/auth/signout"} href="">Logout</.link>
+      <% else %>
+        <li>
+          <.link navigate={~p"/auth/github"} href="">Login with GitHub</.link>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </header>
 <main class="px-4 py-20 sm:px-6 lg:px-8">
