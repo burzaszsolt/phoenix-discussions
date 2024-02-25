@@ -4,10 +4,13 @@
   <%= for topic <- @topics do %>
     <li class="flex justify-between gap-x-6 py-5">
       <%= topic.title %>
-      <div>
-        <.link class="mr-1" navigate={~p"/topics/#{topic.id}/edit"}>Edit</.link>
-        <.link href={~p"/topics/#{topic.id}"} method="delete">Delete</.link>
-      </div>
+
+      <%= if @conn.assigns.user.id == topic.user_id do%>
+        <div>
+          <.link class="mr-1" navigate={~p"/topics/#{topic.id}/edit"}>Edit</.link>
+          <.link href={~p"/topics/#{topic.id}"} method="delete">Delete</.link>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>
