@@ -5,7 +5,7 @@
     <li class="flex justify-between gap-x-6 py-5">
       <.link navigate={~p"/topics/#{topic.id}"}><%= topic.title %></.link>
 
-      <%= if @conn.assigns.user.id == topic.user_id do %>
+      <%= if @conn.assigns.user && @conn.assigns.user.id == topic.user_id do %>
         <div>
           <.link class="mr-1" navigate={~p"/topics/#{topic.id}/edit"}>Edit</.link>
           <.link href={~p"/topics/#{topic.id}"} method="delete">Delete</.link>

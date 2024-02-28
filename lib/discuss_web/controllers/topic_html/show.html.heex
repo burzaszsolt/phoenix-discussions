@@ -1,2 +1,14 @@
 <%= @topic.title %>
-<button>Ping</button>
+
+<div class="mt-2">
+  <.input type="textarea" name="comment" value="" />
+  <button id="add-comment-btn" class="bg-sky-400 p-1 rounded-md shadow-lg mt-1">
+    Add comment
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    window.createSocket(<%= @topic.id %>)
+  })
+</script>
