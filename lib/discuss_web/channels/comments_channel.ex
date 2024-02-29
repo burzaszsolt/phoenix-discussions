@@ -6,7 +6,9 @@ defmodule DiscussWeb.CommentsChannel do
   @impl true
   def join("comments:" <> topic_id, _params, socket) do
     topic_id = String.to_integer(topic_id)
-    topic = Topic
+
+    topic =
+      Topic
       |> Repo.get(topic_id)
       |> Repo.preload(:comments)
 
@@ -23,8 +25,10 @@ defmodule DiscussWeb.CommentsChannel do
       |> Comment.changeset(%{content: content})
 
     case Repo.insert(changeset) do
-      {:ok, _comment} ->
+      {:ok, comment} ->
+        broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{comment: comment})
         {:reply, :ok, socket}
+
       {:error, _reason} ->
         {:reply, {:error, %{errors: changeset}}, socket}
     end

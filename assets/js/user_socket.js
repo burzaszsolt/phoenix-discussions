@@ -73,15 +73,25 @@ const createSocket = (topicId) => {
 
     channel.push("comment:add", { content: content });
   });
+
+  channel.on(`comments:${topicId}:new`, renderComment);
+};
+
+const renderComment = (event) => {
+  console.log({ event });
+  document.querySelector(".comment-list").innerHTML += commentTemplate(event.comment);
 };
 
 const renderComments = (comments) => {
   const renderedComments = comments.map((comment) => {
-    return `<li>${comment.content}</li>`;
+    return commentTemplate(comment);
   });
 
   document.querySelector(".comment-list").innerHTML = renderedComments.join("");
+};
 
+const commentTemplate = (comment) => {
+  return `<li>${comment.content}</li>`;
 };
 
 window.createSocket = createSocket;
