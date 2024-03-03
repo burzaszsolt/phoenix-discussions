@@ -62,6 +62,7 @@ const createSocket = (topicId) => {
   channel
     .join()
     .receive("ok", (resp) => {
+      console.log(resp);
       renderComments(resp.comments);
     })
     .receive("error", (resp) => {
@@ -79,7 +80,9 @@ const createSocket = (topicId) => {
 
 const renderComment = (event) => {
   console.log({ event });
-  document.querySelector(".comment-list").innerHTML += commentTemplate(event.comment);
+  document.querySelector(".comment-list").innerHTML += commentTemplate(
+    event.comment
+  );
 };
 
 const renderComments = (comments) => {
@@ -91,7 +94,11 @@ const renderComments = (comments) => {
 };
 
 const commentTemplate = (comment) => {
-  return `<li>${comment.content}</li>`;
+  let email = "Anonymous";
+  if (comment.user) {
+    email = comment.user.email;
+  }
+  return `<li class="flex justify-between gap-x-6 py-5 border-md border-sky-400">${comment.content}<div>${email}</div></li>`;
 };
 
 window.createSocket = createSocket;
